@@ -22,7 +22,7 @@ export const searchUser = async (req, res) => {
 
     try {
         const query = req.params.query
-        const page = paserInt(req.params.page) || 1
+        const page = parseInt(req.params.page) || 1
         const limit = parseInt(req.query.limit) || 10
         const skip = (page - 1) * limit
 
@@ -40,7 +40,62 @@ export const searchUser = async (req, res) => {
             .skip(skip)
             .limit(limit)
         
+        const total = await User.countDocuments(searchQuery)
         
+        res.json({
+            users,
+            currentPage: page,
+            totalPages: Math.ceil(total / limit),
+            totalUsers: total,
+        })        
+    } catch (error) {
+        res.status(500).json({ message: "Error searching user", error: error.message })
+    }
+}
+
+export const createUser = async (req, res) => {
+    try {
+       const { name, email, phone, status } = req.body
+       
+    if(!name || !email || !phone) {
+        return res.status(400).json({ message: "Name, Email and Phone are required.!" })
+    }
+    const existingUser = await User.findOne({ email })
+    
+    if(existingUser) {
+        return res.status(400).json({ message: " Email already exist..!"})
+    }
+    
+    const user = new User({
+        name,
+        email,
+        phone,
+        status: status || "Active"
+    })
+    await user.save()
+    res.status(201).json(user)
+         
+    } catch (error) {
+        res.status(500).json({ message: "Error Creating User.", error: error.message })
+    }
+}
+
+// Get All Users
+export const getAllUsers = async (req, res) => {
+
+    try {
+        const query = req.params.query
+        const page = parseInt(req.params.page) || 1
+        const limit = parseInt(req.query.limit) || 10
+        const skip = (page - 1) * limit
+
+        const users = await User           
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(limit)
+        
+        const total = await User.countDocuments()
+
         res.json({
             users,
             currentPage: page,
@@ -48,8 +103,22 @@ export const searchUser = async (req, res) => {
             totalUsers: total,
         })
 
-        
     } catch (error) {
-        res.status(500).json({ message: "Error searching user", error: error.message })
+        res.status(500).json({ message: "Error Getting the User.", error: error.message })
+    }
+}
+
+// Get single User
+export const getUser = async (req, res) => {
+
+    try {
+        const user = await User.findById(req.params.id)
+        if (!user) {
+            return res.status(404).json({ message: "User Not Found.!" })
+        }
+
+        res.json(user)
+    } catch (error) {
+        res.status(500).json({ message: "Error Getting the User.", error: error.message })
     }
 }
