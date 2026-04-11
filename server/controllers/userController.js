@@ -84,15 +84,15 @@ export const createUser = async (req, res) => {
 export const getAllUsers = async (req, res) => {
 
     try {
-        const query = req.params.query
+        const users = await User.find()
         const page = parseInt(req.params.page) || 1
         const limit = parseInt(req.query.limit) || 10
         const skip = (page - 1) * limit
 
-        const users = await User           
-            .sort({ createdAt: -1 })
-            .skip(skip)
-            .limit(limit)
+        // const users = await User           
+        //     .sort({ createdAt: -1 })
+        //     .skip(skip)
+        //     .limit(limit)
         
         const total = await User.countDocuments()
 
@@ -108,7 +108,7 @@ export const getAllUsers = async (req, res) => {
     }
 }
 
-// Get single User
+// Get single User By ID
 export const getUser = async (req, res) => {
 
     try {
@@ -120,5 +120,36 @@ export const getUser = async (req, res) => {
         res.json(user)
     } catch (error) {
         res.status(500).json({ message: "Error Getting the User.", error: error.message })
+    }
+}
+
+// Update USer
+export const updateUser = async (req, res) => {
+    try {
+        const {name, email, phone, status} = req.body
+
+        if (email) {
+            const exists = await User.find({ email, _id: { $ne: req.params.id } })
+            if (exists) {
+                return res.status(400).json({ message: "Email already Exist.!" })
+            }
+        }
+
+        const user = await User.findByIdAndUpdate(
+            req.params.id,
+            { name, email, phone, status },
+            { new: true, runValidators: true }
+        )
+
+        if (!user) {
+            return
+            res.status(404).json({ message: "User not found." })
+            res.json(user)
+        }
+
+    } catch (error) {
+        res
+            .status(500)
+            .json({ message: "Error Updating the User.", error: error.message })
     }
 }
