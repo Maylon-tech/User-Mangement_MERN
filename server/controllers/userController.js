@@ -76,7 +76,7 @@ export const createUser = async (req, res) => {
     res.status(201).json(user)
          
     } catch (error) {
-        res.status(500).json({ message: "Error Creating User.", error: error.message })
+        res.status(500).json({ message: "Error Creating a User.", error: error.message })
     }
 }
 
@@ -104,7 +104,7 @@ export const getAllUsers = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({ message: "Error Getting the User.", error: error.message })
+        res.status(500).json({ message: "Error Getting All Users.", error: error.message })
     }
 }
 
@@ -130,7 +130,7 @@ export const updateUser = async (req, res) => {
 
         if (email) {
             const exists = await User.find({ email, _id: { $ne: req.params.id } })
-            if (exists) {
+            if (exists.length > 0) {
                 return res.status(400).json({ message: "Email already Exist.!" })
             }
         }
@@ -151,5 +151,21 @@ export const updateUser = async (req, res) => {
         res
             .status(500)
             .json({ message: "Error Updating the User.", error: error.message })
+    }
+}
+
+// Delete user By ID
+export const deleteUser = async (req, res) => {
+    try {
+        const user = await User.findByIdAndDelete(req.params.id)
+
+        if (!user) {
+            return res.status(404).json({ message: "user not found" })
+        }
+        res.json({ message: "user deleted successfully", success: true })
+    } catch (error) {
+        res
+            .status(500)
+            .json({ message: "Error Deleting the User.", error: error.message })
     }
 }
