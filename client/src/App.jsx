@@ -3,6 +3,15 @@ import { Plus, Users } from "lucide-react"
 import StatsCard from "./components/StatsCard"
 import SearchBar from "./components/SearchBar"
 import UserTable from "./components/UserTable"
+import UserModel from "./components/UserModel"
+import {
+  getUsers,
+  searchUsers,
+  getStats,
+  addUser,
+  updateUser,
+  deleteUser
+} from './api/userApi'
 
 
 function App() {
@@ -33,12 +42,17 @@ function App() {
         {/* STATS */}
         <div className="grid  grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <StatsCard />
-          <StatsCard />
-          <StatsCard />
+          {/* <StatsCard />
+          <StatsCard /> */}
         </div>
         {/* SEARCH */}
         <SearchBar />
+
+        {/* User Table */}
         <UserTable />
+
+        {/* User Add Modal */}
+        {/* <UserModel /> */}
       </main>
       
 

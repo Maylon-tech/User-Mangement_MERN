@@ -1,4 +1,4 @@
-import { Edit, Trash } from "lucide-react"
+import { ChevronLeft, ChevronRight, Edit, Trash } from "lucide-react"
 
 
 
@@ -43,10 +43,27 @@ const UserTable = () => {
                 {/* Conditional Rendering */}
                 
                 <tr>
-                    <td>No User Found!</td>
+                    <td className="text-center py-12 text-gray-400" colSpan={6}>No User Found!</td>
                 </tr>
             </tbody>
         </table>
+      </div>
+
+      {/* Pagination */}
+      {/* Conditional Rendering */}
+      <div className="px-6 py-4 border-t border-gray-800 flex justify-between items-center bg-gray-800">
+        <div className="text-sm text-gray-400">Page 1 of 5</div>
+        <div className="flex gap-2">
+            <button className="flex items-center gap-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg hover:bg-gray-600 disabled:opacity-50">
+                <ChevronLeft size={16} /> Prev
+            </button>
+            
+            <button className={`px-3 py-2 rounded-lg`}>1</button>
+            
+            <button className="flex items-center gap-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg hover:bg-gray-600 disabled:opacity-50">
+                Next <ChevronRight size={16} /> 
+            </button>
+        </div>
       </div>
     </div>
   )
