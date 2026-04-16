@@ -1,13 +1,19 @@
 import { Check, X } from "lucide-react"
 
 
-const UserModel = () => {
+const UserModel = ({ isOpen, onClose }) => {
+
+    if(!isOpen) return null
+
   return (
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
         <div className="bg-gray-900 rounded-lg shadow-2xl max-w-2xl w-full max-h-screen overflow-y-auto border border-gray-800">
             <div className="flex justify-between items-center p-6 border-b border-gray-800">
                 <h2 className="text-2xl font-bold text-white">Add New user</h2>
-                <button className="text-gray-400 hover:text-white transition-all">
+                  <button
+                    className="text-gray-400 hover:text-white transition-all"
+                    onClick={onClose}
+                  >
                     <X size={24} />
                 </button>
             </div>
