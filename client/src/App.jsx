@@ -163,7 +163,21 @@ function App() {
           />
         </div>
         {/* SEARCH */}
-        <SearchBar value={searchTerm} onChange={searchTerm} />
+        <SearchBar
+          value={searchTerm}
+          onChange={searchTerm}
+          onClear={() => {
+            setSearchTerm("")
+            setCurrentPage(1)
+          }}
+          itemsPerPage={itemsPerPage}
+          onItemsPerPageChange={(val) => {
+            setItemsPerPage(val)
+            setCurrentPage(1)
+          }}
+          currentPage={currentPage}
+          totalUsers={totalUsers}
+        />
 
         {/* User Table */}
         <UserTable />

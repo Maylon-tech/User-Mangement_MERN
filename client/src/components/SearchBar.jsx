@@ -1,7 +1,20 @@
 import { Search, X } from "lucide-react"
 
 
-const SearchBar = () => {
+const SearchBar = ({
+  value,
+  onChange,
+  onClear,
+  ItemsPerPage,
+  onItemsPerPageChange,
+  currentPage,
+  totalUsers
+
+}) => {
+  const startUser  = totalUsers === 0 ? 0 : (currentPage - 1) * ItemsPerPage + 1
+
+  const endUser = Math.min(currentPage * ItemsPerPage, totalUsers)
+
   return (
     <div className="bg-gray-900 rounded-lg shadow-lg p-4 border border-gray-800 flex flex-col md:flex-row md:tems-center md:justify-between gap-4">
       {/* Search input */}
