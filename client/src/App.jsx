@@ -165,14 +165,14 @@ function App() {
         {/* SEARCH */}
         <SearchBar
           value={searchTerm}
-          onChange={searchTerm}
+          onChange={setSearchTerm}
           onClear={() => {
             setSearchTerm("")
             setCurrentPage(1)
           }}
           itemsPerPage={itemsPerPage}
           onItemsPerPageChange={(val) => {
-            setItemsPerPage(val)
+            setItemsPerPage(Number(val))
             setCurrentPage(1)
           }}
           currentPage={currentPage}
@@ -180,10 +180,20 @@ function App() {
         />
 
         {/* User Table */}
-        <UserTable />
+        <UserTable
+          users={users}
+          onEdit={openModal}
+          onDelete={handleDelete}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
 
         {/* User Add Modal */}
-        <UserModel isOpen={isModalOpen} onClose={closeModal} /> 
+        <UserModel
+          isOpen={isModalOpen}
+          onClose={closeModal}
+        /> 
       </main>
       
 

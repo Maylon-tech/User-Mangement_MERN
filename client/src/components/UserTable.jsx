@@ -2,7 +2,14 @@ import { ChevronLeft, ChevronRight, Edit, Trash } from "lucide-react"
 
 
 
-const UserTable = () => {
+const UserTable = ({
+    users,
+    onEdit,
+    onDelete,
+    currentPage,
+    totalPages,
+    onPageChange,
+}) => {
   return (
     <div className="gb-gray-900 rounded-lg overflow-hidden border border-gray-800">
       <div className="overflow-x-auto">
@@ -19,26 +26,34 @@ const UserTable = () => {
             </thead>
             <tbody className="divide-y divide-gray-800">
                 {/* map method here */}
-                <tr className="hover:bg-gray-800 transition-colors">
-                    <td className="px-6 py-4 text-sm text-white font-medium">User Name</td>
-                    <td className="px-6 py-4 text-sm text-white font-medium">email</td>
-                    <td className="px-6 py-4 text-sm text-white font-medium">Phone</td>
-                    
-                    <td className={`px-6 py-4 text-sm rounded-full font-semibold`}>Active</td>
-                    
-                    <td className="px-6 py-4 text-sm text-gray-400">Date</td>
-                    
-                    <td className="px-6 py-4 text-center">
-                        <div className="flex justify-center gap-2">
-                            <button className="flex items-center gap-1 px-3 py-1.5 text-sm bg-green-500 text-gray-900 rounded-lg hover:bg-green-400 transition-all font-semibold">
-                                <Edit size={16} /> Edit
-                            </button>
-                            <button className="flex items-center gap-1 px-3 py-1.5 text-sm bg-red-500 text-white rounded-lg hover:bg-red-400 transition-all font-semibold">
-                                <Trash size={16} /> Edit
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                {users.map((u, index) => (
+                    <tr className="hover:bg-gray-800 transition-colors">
+                        <td className="px-6 py-4 text-sm text-white font-medium">
+                            {u.name}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-white font-medium">
+                            {u.email}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-white font-medium">
+                            {u.phone}
+                        </td>
+                        
+                        <td className={`px-6 py-4 text-sm rounded-full font-semibold`}>Active</td>
+                        
+                        <td className="px-6 py-4 text-sm text-gray-400">Date</td>
+                        
+                        <td className="px-6 py-4 text-center">
+                            <div className="flex justify-center gap-2">
+                                <button className="flex items-center gap-1 px-3 py-1.5 text-sm bg-green-500 text-gray-900 rounded-lg hover:bg-green-400 transition-all font-semibold">
+                                    <Edit size={16} /> Edit
+                                </button>
+                                <button className="flex items-center gap-1 px-3 py-1.5 text-sm bg-red-500 text-white rounded-lg hover:bg-red-400 transition-all font-semibold">
+                                    <Trash size={16} /> Edit
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                ))}
                 
                 {/* Conditional Rendering */}
                 
