@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Edit, Trash } from "lucide-react"
+import { ChevronLeft, ChevronRight, Edit, Trash2 } from "lucide-react"
 
 
 
@@ -10,6 +10,8 @@ const UserTable = ({
     totalPages,
     onPageChange,
 }) => {
+
+
   return (
     <div className="gb-gray-900 rounded-lg overflow-hidden border border-gray-800">
       <div className="overflow-x-auto">
@@ -24,35 +26,37 @@ const UserTable = ({
                     <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Action</th>
                 </tr>
             </thead>
+            
             <tbody className="divide-y divide-gray-800">
                 {/* map method here */}
-                {users.map((u, index) => (
-                    <tr className="hover:bg-gray-800 transition-colors">
-                        <td className="px-6 py-4 text-sm text-white font-medium">
-                            {u.name}
-                        </td>
-                        <td className="px-6 py-4 text-sm text-white font-medium">
-                            {u.email}
-                        </td>
-                        <td className="px-6 py-4 text-sm text-white font-medium">
-                            {u.phone}
-                        </td>
-                        
-                        <td className={`px-6 py-4 text-sm rounded-full font-semibold`}>Active</td>
-                        
-                        <td className="px-6 py-4 text-sm text-gray-400">Date</td>
-                        
-                        <td className="px-6 py-4 text-center">
-                            <div className="flex justify-center gap-2">
-                                <button className="flex items-center gap-1 px-3 py-1.5 text-sm bg-green-500 text-gray-900 rounded-lg hover:bg-green-400 transition-all font-semibold">
-                                    <Edit size={16} /> Edit
-                                </button>
-                                <button className="flex items-center gap-1 px-3 py-1.5 text-sm bg-red-500 text-white rounded-lg hover:bg-red-400 transition-all font-semibold">
-                                    <Trash size={16} /> Edit
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                {
+                    users.map((user, index) => (
+                        <tr className="hover:bg-gray-800 transition-colors" key={index}>
+                            <td className="px-6 py-4 text-sm text-white font-medium">
+                                {user.name}
+                            </td>
+                            <td className="px-6 py-4 text-sm text-white font-medium">
+                                {user.email}
+                            </td>
+                            <td className="px-6 py-4 text-sm text-white font-medium">
+                                {user.phone}
+                            </td>
+                            
+                            <td className={`px-6 py-4 text-sm rounded-full font-semibold`}>Active</td>
+                            
+                            <td className="px-6 py-4 text-sm text-gray-400">Date</td>
+                            
+                            <td className="px-6 py-4 text-center">
+                                <div className="flex justify-center gap-2">
+                                    <button className="flex items-center gap-1 px-3 py-1.5 text-sm bg-green-500 text-gray-900 rounded-lg hover:bg-green-400 transition-all font-semibold">
+                                        <Edit size={16} /> Edit
+                                    </button>
+                                    <button className="flex items-center gap-1 px-3 py-1.5 text-sm bg-red-500 text-white rounded-lg hover:bg-red-400 transition-all font-semibold">
+                                        <Trash2 size={16} /> Remove
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
                 ))}
                 
                 {/* Conditional Rendering */}

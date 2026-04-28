@@ -34,17 +34,6 @@ function App() {
 
   const status = ["Active", "Inactive"]
 
-  // fetch Users
-  useEffect(() => {
-    fetchUsers()
-  }, [currentPage, itemsPerPage])
-
-   useEffect(() => {
-    if(searchTerm) handleSearch()
-      else fetchUsers()
-  }, [searchTerm])
-
-
   // fetch stats
   const fetchStats = async () => {
     const data = await getStats()
@@ -109,6 +98,16 @@ function App() {
     setEditingItem(null)
     setFormData({ name: "", email: "", phone: "", status: "Active"})
   }
+
+   // fetch Users
+  useEffect(() => {
+    fetchUsers()
+  }, [currentPage, itemsPerPage])
+
+  useEffect(() => {
+    if(searchTerm) handleSearch()
+      else fetchUsers()
+    }, [searchTerm])
 
   return (
     <div className="min-h-screen bg-gray-950">
@@ -193,6 +192,7 @@ function App() {
         <UserModel
           isOpen={isModalOpen}
           onClose={closeModal}
+          onSubmit={handleSubmit}
         /> 
       </main>
       

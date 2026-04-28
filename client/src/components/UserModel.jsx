@@ -1,7 +1,7 @@
 import { Check, X } from "lucide-react"
 
 
-const UserModel = ({ isOpen, onClose }) => {
+const UserModel = ({ isOpen, onClose, onSubmit }) => {
 
     if(!isOpen) return null
 
@@ -59,10 +59,13 @@ const UserModel = ({ isOpen, onClose }) => {
                     </div>
                 </div>
                 <div className="flex gap-3 mt-4">
-                    <button className="flex-1 px-4 py-2.5 bg-gray-800 border border-gray-700 text-gray-300 rounded-lg hover:bg-fray-700">
+                    <button onClick={onClose} className="flex-1 px-4 py-2.5 bg-gray-800 border border-gray-700 text-gray-300 rounded-lg hover:bg-fray-700">
                         Cancel
                     </button>
-                    <button className="flex-1 flex items-center justify-center px-4 py-2.5 bg-green-500 border border-gray-700 text-gray-900 rounded-lg hover:bg-green-400 transition-all">
+                    <button 
+                        className="flex-1 flex items-center justify-center px-4 py-2.5 bg-green-500 border border-gray-700 text-gray-900 rounded-lg hover:bg-green-400 transition-all"
+                        onClick={onSubmit}
+                    >
                         <Check size={20} />
                     </button>
                 </div>
