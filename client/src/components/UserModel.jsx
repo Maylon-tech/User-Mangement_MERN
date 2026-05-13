@@ -66,7 +66,7 @@ const UserModel = ({ isOpen, onClose, onSubmit }) => {
                         className="flex-1 flex items-center justify-center px-4 py-2.5 bg-green-500 border border-gray-700 text-gray-900 rounded-lg hover:bg-green-400 transition-all"
                         onClick={onSubmit}
                     >
-                        <Check size={20} />
+                        <Check size={20} /> Add
                     </button>
                 </div>
             </div>

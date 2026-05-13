@@ -2,16 +2,12 @@ import User from '../models/userModel.js'
 
 // Get Status
 export const getStatus = async (req, res) => {
-
     try {
-
         const total = await User.countDocuments()
         const active = await User.countDocuments({status: "Active"})
         const inactive = await User.countDocuments({ status: "Inactive" })
         
         res.json({ total, active, inactive })
-
-        res.json("Hello World  again")
     } catch (error) {
         res.status(500).json({ message: "Error fetch statistics", error: error.message })
     }
