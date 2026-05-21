@@ -48,12 +48,12 @@ function App() {
     fetchStats()
   }
 
-  const handleSearch = async () => {
-    const data = await searchUsers(searchTerm, currentPage, itemsPerPage)
-    setUsers(data.users)
-    setTotalPages(data.total.Pages)
-    setTotalUsers(data.totalUsers)
-  }
+  // const handleSearch = async () => {
+  //   const data = await searchUsers(searchTerm, currentPage, itemsPerPage)
+  //   setUsers(data.users)
+  //   setTotalPages(data.total.Pages)
+  //   setTotalUsers(data.totalUsers)
+  // }
 
   const handleSubmit = async () => {
     if (!formData.name || !formData.email || !formData.phone) {
@@ -104,10 +104,10 @@ function App() {
     fetchUsers()
   }, [currentPage, itemsPerPage])
 
-  useEffect(() => {
-    if(searchTerm) handleSearch()
-      else fetchUsers()
-    }, [searchTerm])
+  // useEffect(() => {
+  //   if(searchTerm) handleSearch()
+  //     else fetchUsers()
+  //   }, [searchTerm])
 
   return (
     <div className="min-h-screen bg-gray-950">
